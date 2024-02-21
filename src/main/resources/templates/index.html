@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>방명록</title>
+    <!-- jquery-->
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <script th:src="@{/javascript/index.js}"></script>
+</head>
+<body>
+    <div id="wrap">
+        <div id="form-wrap">
+            <form id="wfm" method="post" th:action="@{/write}" th:object="${guestDto}">
+                <div class="form-box">
+                    <div class="img-box">
+                        <img src="/image/makeup5.jpg" alt="">
+                    </div>
+                    <div class="input-box">
+                        <div class="text-box">
+                            <textarea th:field="*{content}"></textarea>
+                            <div class="error" th:errors="*{content}"></div>
+                        </div>
+                        <div class="sub-box">
+                            <span>
+                                <label>작성자</label>
+                                <input type="text" th:field="*{writer}">
+                                <div class="error" th:errors="*{writer}"></div>
+                            </span>
+                            <span><button>작성</button></span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div id="list-wrap">
+            <ul class="list-box">
+                <li class="list-cont" th:each="row,stat : ${list}">
+                    <div class="form-box">
+                        <div class="img-box">
+                            <img th:src="@{'https://loremflickr.com/200/200/avata?random='+${stat.count} }" alt="">
+                        </div>
+                        <div class="cont-box">
+                            <div class="sub-box">
+                                <span>작성자 : <b th:text="${row.writer}">요다</b></span>
+                                <span th:text="${row.writeDate}">2024.02.21 11:34</span>
+                            </div>
+                            <div class="text-box">
+                                <textarea th:text="${row.content}" readonly>dsddsdsd</textarea>
+                            </div>
+                            <div class="del"><a thhref="@{ '/delete/'+${row.id} }">삭제</a></div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</body>
+</html>
