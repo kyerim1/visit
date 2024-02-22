@@ -39,17 +39,17 @@
                 <li class="list-cont" th:each="row,stat : ${list}">
                     <div class="form-box">
                         <div class="img-box">
-                            <img th:src="@{'https://loremflickr.com/200/200/avata?random='+${stat.count} }" alt="">
+                            <img th:src="@{'https://loremflickr.com/200/200/actor?random='+${stat.count} }" alt="">
                         </div>
                         <div class="cont-box">
                             <div class="sub-box">
                                 <span>작성자 : <b th:text="${row.writer}">요다</b></span>
-                                <span th:text="${row.writeDate}">2024.02.21 11:34</span>
+                                <span th:text="${#temporals.format(row.writeDate, 'yyyy.MM.dd HH:mm')}">2024.02.21 11:34</span>
                             </div>
                             <div class="text-box">
                                 <textarea th:text="${row.content}" readonly>dsddsdsd</textarea>
                             </div>
-                            <div class="del"><a thhref="@{ '/delete/'+${row.id} }">삭제</a></div>
+                            <div class="del"><a th:href="@{ '/delete/'+${row.id} }">삭제</a></div>
                         </div>
                     </div>
                 </li>

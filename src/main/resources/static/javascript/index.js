@@ -3,18 +3,17 @@ $(function(){
 
     $("#content").on("focus",removeError);
     $("#writer").on("focus", removeError);
+    $(".error").on("click",removeError);
     $("#content").on("blur",addError);
     $("#writer").on("blur", addError);
-    $("#writer").on("keyup",function(e){
-        if(e.keyCode==13){
-            $("#wfm").submit();
-        }
-    })
 });
 function removeError(){
-    var hasError = $(this).next().hasClass("error");
-    if( hasError){
-        $(this).next().hide();
+    if( $(this).hasClass("error") ){
+        $(this).hide();
+        $(this).prev().focus();
+    }else{
+        var hasError = $(this).next().hasClass("error");
+        if( hasError)    $(this).next().hide();
     }
 }
 function addError(){
